@@ -288,6 +288,7 @@ $(function() {
                                 $dmn_results.append('<div>dmn result file (<a href="#" class="file-download">'+data.result+'</a>) <i class="fa fa-download" aria-hidden="true"></i></div>');
                                 $dmn_results.append('<div>end..</div>');
                             } else {
+                                alert(1);
                                 let error = 'Unknown error';
                                 if (data.error) {
                                     error = data.error;
@@ -295,7 +296,11 @@ $(function() {
                                 $dmn_results.append('<div class="alert alert-danger" role="alert">'+error+'</div>');
                             }
                         },
+                        error: function(data){
+                            $dmn_results.append('<div class="alert alert-danger" role="alert">'+JSON.stringify(data)+'</div>');
+                        },
                         failure: function(err) {
+                            $dmn_results.append('<div class="alert alert-danger" role="alert">'+JSON.stringify(err)+'</div>');
                             console.log(err);
                         }
                     });

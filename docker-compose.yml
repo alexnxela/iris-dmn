@@ -10,7 +10,6 @@ services:
       - 52773:52773
     environment:
       - DMN_ENV=dev
-      - DMN_JAR_PATH=/home/irisowner/dev/dmn.jar
       - DMN_DATA_PATH=/home/irisowner/dev/data
     volumes:
       - ./:/home/irisowner/dev

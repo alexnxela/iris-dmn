@@ -5,7 +5,12 @@ This solution allows you to visualize business logic (for example, tariff schedu
 
 This application is designed to show how you can work with this using IRIS and DMN
 
-![Main](https://github.com/alexnxela/iris-dmn/blob/main/demo.png?raw=true)
+![Main](https://github.com/alexnxela/iris-dmn/blob/main/demo.gif?raw=true)
+
+## About DMN
+The Decision Model and Notation (DMN™) is a Standard by OMG®, providing a conventional and visual notation readily understandable by all users and personas. 
+1. https://learn-dmn-in-15-minutes.com/
+2. https://kiegroup.github.io/dmn-feel-handbook/#dmn-feel-handbook
 
 ## Features
 * Write queries to the IRIS database using SQL and receive them in a beautiful form

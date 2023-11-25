@@ -41,6 +41,9 @@ ClassMethod execute() As %Status
     Set gateway = $system.external.getJavaGateway()
 
     Set dmnJarPath = $system.Util.GetEnviron("DMN_JAR_PATH")
+    If dmnJarPath = "" {
+        Set dmnJarPath = "/usr/irissys/csp/dmn/dmn.jar"
+    }
 
     Do gateway.addToPath(dmnJarPath)
     Set proxy = gateway.new("org.dmn.Main")
