@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level- %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="${sys:log.level:-info}" additivity="false">
+            <AppenderRef ref="Console" />
+        </Root>
+        <Logger level="fatal" additivity="false" name="org.kie.util.maven.support.PomModel">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger level="fatal" additivity="false" name="org.kie.maven">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger level="fatal" additivity="false" name="org.kie.maven.integration.embedder.MavenEmbedder">
+            <AppenderRef ref="Console" />
+        </Logger>
+    </Loggers>
+</Configuration>

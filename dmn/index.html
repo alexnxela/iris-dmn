@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/dmn/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/dmn/common.js"></script>
+    <script src="/dmn/app.js"></script>
+
+    <title>IRIS-DMN</title>
+</head>
+<body>
+<!--
+    https://fontawesome.com/search?o=r&m=free&c=editing - icons pack
+-->
+<style type="text/css" media="screen">
+    #editor {
+        width: 100%;
+        height: 300px;
+    }
+
+    .dmn-sql-results iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+<div class="col-lg-12 mx-auto p-3 py-md-12">
+    <header class="d-flex align-items-center pb-1 mb-3 border-bottom">
+        <a href="/dmn/index.html" class="d-flex align-items-center text-dark text-decoration-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" role="img"
+                 viewBox="0 0 512 512">
+                <path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
+            </svg>
+            <span class="fs-4">IRIS-DMN</span>
+        </a>
+    </header>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Sql query for IRIS DB
+                            <a href="#" class="float-end btn btn-primary btn-sm dmn-sql-btn-run">Run query <sup>(ctrl/cmd
+                                + enter)</sup></a>
+
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="editor"></div>
+                            <div id="editor-default" class="d-none">
+-- for example, you can execute part of the query by selected it
+
+SELECT NOW()
+
+DROP TABLE IF EXISTS people
+
+CREATE TABLE people (
+name VARCHAR(255),
+city VARCHAR(255),
+age INT(11)
+)
+
+INSERT INTO people (name, age, city) VALUES ('Alex', 30, 'Paris')
+INSERT INTO people (name, age, city) VALUES ('Ivan', 20, 'London')
+
+SELECT name, age, city FROM people
+
+-- then you can load example of dmn (right button) and click "run" button
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="dmn-sql-loader d-none">
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="dmn-sql-hint text-muted small">you can execute part of the query by selected
+                                it
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link dmn-sql-results-btn active" aria-current="true" href="#">Sql
+                                        results</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link dmn-sql-history-btn" href="#">Sql history</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link dmn-results-btn" href="#">DMN results</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link dmn-file-results-btn" href="#">File results</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body p-4 dmn-sql-results small"
+                             style="min-height: 200px; max-height: 210px; overflow: auto;">
+                            Empty..
+                        </div>
+                        <div class="card-body p-2 dmn-sql-history small d-none"
+                             style="min-height: 200px; max-height: 210px; overflow: auto;">
+                            <ul class="list-group">
+                                <li class="list-group-item">An item</li>
+                            </ul>
+                        </div>
+                        <div class="card-body p-4 dmn-results small d-none"
+                             style="min-height: 200px; max-height: 210px; overflow: auto;">
+                            Empty..
+                        </div>
+                        <div class="card-body p-4 dmn-file-results small d-none"
+                             style="min-height: 200px; max-height: 210px; overflow: auto;">
+                            Empty..
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    DMN
+                    <div class="btn-group float-end">
+                        <button type="button" class="btn btn-primary btn-sm dmn-run-btn">Run</button>
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item dmn-save-btn" href="#">Save</a>
+                            </li>
+                            <li><a class="dropdown-item dmn-modal-upload-file-open-btn" href="#">Upload DMN file</a>
+                            </li>
+                            <li><a class="dropdown-item dmn-download-file-btn" href="#">Download as file</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item dmn-upload-sample-file-btn" href="#">Upload sample DMN file</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div id="dmn-editor-container"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dmn-modal-upload-file" tabindex="-1" aria-labelledby="dmn-file-upload-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dmn-file-upload-modal-label">Upload DMN file</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="file-upload-form">
+                    <div class="mb-3">
+                        <label for="file-input" class="form-label">Choose file</label>
+                        <input type="file" class="form-control dmn-file-upload" id="file-input" name="file"
+                               accept=".dmn">
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block dmn-upload-file-btn">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toasts" style="position: absolute; top: 10px; right: 10px;">
+    <div class="toast-tpl d-none">
+        <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body"></div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.31.2/ace.min.js"
+        integrity="sha512-4qIbBlcJOvbOmEB50FfnviJ9jOCen2yhi4skodkbTLU/uJJdULPxlX2R9Enf1oOBleUK9KD3fGmMcnItFQdNeA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.31.2/ext-language_tools.min.js"
+        integrity="sha512-O2P4Md+JYJDtDMVY4rnpX1TaZC3axbHnNDIK0ppq05mRYXSmwxo1cjsmm7gsjgVAsudJqSr9qJ1nmktzdDLTIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script src="https://kiegroup.github.io/kogito-online/standalone/dmn/index.js"></script>
+
+<style>
+    #dmn-editor-container {
+        height: 624px;
+    }
+    .fa-download {
+        cursor: pointer;
+    }
+</style>
+</body>
+</html>
