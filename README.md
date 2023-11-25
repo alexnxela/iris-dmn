@@ -8,6 +8,7 @@ This application is designed to show how you can work with this using IRIS and D
 ![Main](https://github.com/alexnxela/iris-dmn/blob/main/demo.gif?raw=true)
 
 ## About DMN
+DMN was invented in 2015 by the same guys who created BPMN - these 2 notations go well together. But it can also be used separately.
 The Decision Model and Notation (DMN™) is a Standard by OMG®, providing a conventional and visual notation readily understandable by all users and personas. 
 1. https://learn-dmn-in-15-minutes.com/
 2. https://kiegroup.github.io/dmn-feel-handbook/#dmn-feel-handbook
@@ -45,9 +46,7 @@ docker-compose up -d
 zpm "install iris-dmn"
 ```
 
-
 ## How to run it
-### Run the python script in iris container:
 
 ```bash
 docker-compose up -d 
