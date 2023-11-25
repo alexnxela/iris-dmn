@@ -49,4 +49,4 @@ docker-compose exec iris bash
 $ irispython ./rh/flask/main.py
 ```
 ### and then you can follow the link
->**http://localhost:5000**
+>**http://localhost:52773/dmn/index.html**
