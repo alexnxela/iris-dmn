@@ -45,10 +45,7 @@ zpm "install iris-dmn"
 ### Run the python script in iris container:
 
 ```bash
-# attach to the running IRIS container
-docker-compose exec iris bash
-# run the script
-$ irispython ./rh/flask/main.py
+docker-compose up -d 
 ```
 ### and then you can follow the link
 >**http://localhost:52773/dmn/index.html**
