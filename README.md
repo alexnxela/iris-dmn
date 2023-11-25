@@ -5,7 +5,7 @@ This solution allows you to visualize business logic (for example, tariff schedu
 
 This application is designed to show how you can work with this using IRIS and DMN
 
-![Main](https://github.com/alexnxela/iris-dmn/blob/master/demo.png?raw=true)
+![Main](https://github.com/alexnxela/iris-dmn/blob/main/demo.png?raw=true)
 
 ## Features
 * Write queries to the IRIS database using SQL and receive them in a beautiful form
