@@ -165,17 +165,26 @@ ClassMethod sql() As %Status
                 Set resultFilePathStream = ##class(%Stream.FileCharacter).%New()
                 Set status = resultFilePathStream.LinkToFile(resultFilePath _ "." _ type)
 
-                Do resultFilePathStream.Rewind()
-                Set content = resultFilePathStream.Read()
-                Do resultFilePathStream.%Close()
+                If $$$ISERR(status) {
+                    Set error = $System.Status.GetOneErrorText(status)
+                    Set info = {
+                        "status": "error",
+                        "error": (error)
+                    }
+                } else {
+                        Do resultFilePathStream.Rewind()
+                        Set content = resultFilePathStream.Read()
+                        Do resultFilePathStream.%Close()
 
-                Set info = {
-                    "status": "ok",
-                    "data": (content),
-                    "file_path": (resultFilePath)
+                        Set info = {
+                            "status": "ok",
+                            "data": (content),
+                            "file_path": (resultFilePath)
+                        }
+
+                        Return ..%ProcessResult($$$OK, info)
                 }
 
-                Return ..%ProcessResult($$$OK, info)
             } else {
                 Set error = $System.Status.GetOneErrorText(sqlResult)
                 Set info = {
