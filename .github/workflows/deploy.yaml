@@ -15,7 +15,7 @@ on:
       port:
         description: 'WebPort for the running instance'
         type: number
-        default: 80
+        default: 52773
     secrets:
       SERVICE_ACCOUNT_KEY:
         required: true
