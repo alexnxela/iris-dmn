@@ -23,18 +23,6 @@ on:
         required: true
   workflow_dispatch:
     inputs:
-      repository:
-        description: 'Deploying repository'
-        required: true
-        type: string
-      ref:
-        description: 'Branch Name in deploying repository'
-        required: true
-        type: choice
-        default: main
-        options:
-          - master
-          - main
       name:
         description: 'Domain name of deployment, before `.demo.community.intersystems.com`'
         required: true
@@ -64,9 +52,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          repository: ${{ inputs.repository }}
-          ref: ${{ inputs.ref }}
 
       - name: Google Authentication
         uses: google-github-actions/auth@v1.0.0
