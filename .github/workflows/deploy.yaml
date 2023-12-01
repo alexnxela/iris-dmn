@@ -1,7 +1,7 @@
 name: Deploy
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       name:
         description: 'Domain name of deployment, before `.demo.community.intersystems.com`'
@@ -21,13 +21,6 @@ on:
         required: true
       CONFIG_BASE64:
         required: true
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Domain name of deployment, before `.demo.community.intersystems.com`'
-        required: true
-        type: string
-        default: iris-dmn
 
 env:
   # Change this section according to your needs
