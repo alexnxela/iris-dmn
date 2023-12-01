@@ -27,6 +27,7 @@ on:
         description: 'Domain name of deployment, before `.demo.community.intersystems.com`'
         required: true
         type: string
+        default: iris-dmn
 
 env:
   # Change this section according to your needs
