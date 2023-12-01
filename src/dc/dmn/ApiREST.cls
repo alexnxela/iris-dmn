@@ -163,7 +163,7 @@ ClassMethod sql() As %Status
                 do sqlResult.%DisplayFormatted(type, resultFilePath)
 
                 Set resultFilePathStream = ##class(%Stream.FileCharacter).%New()
-                Set status = resultFilePathStream.LinkToFile(resultFilePath _ "." _ type)
+                Set status = resultFilePathStream.LinkToFile(resultFilePath _ "." _ $ZCONVERT(type, "U"))
 
                 If $$$ISERR(status) {
                     Set error = $System.Status.GetOneErrorText(status)
@@ -171,6 +171,7 @@ ClassMethod sql() As %Status
                         "status": "error",
                         "error": (error)
                     }
+                    Return ..%ProcessResult($$$OK, info)
                 } else {
                         Do resultFilePathStream.Rewind()
                         Set content = resultFilePathStream.Read()
