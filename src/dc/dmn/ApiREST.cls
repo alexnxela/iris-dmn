@@ -163,7 +163,7 @@ ClassMethod sql() As %Status
                 do sqlResult.%DisplayFormatted(type, resultFilePath)
 
                 Set resultFilePathStream = ##class(%Stream.FileCharacter).%New()
-                Set resultFileFullPath = resultFilePath _ "." _ $ZCONVERT(type, "U")
+                Set resultFileFullPath = resultFilePath _ "." _ $ZCONVERT(type, "L")
                 Set status = resultFilePathStream.LinkToFile(resultFileFullPath)
 
                 If $$$ISERR(status) {
