@@ -8,6 +8,8 @@ services:
     ports:
       - 51773:1972
       - 52773:52773
+    env_file:
+      - .env
     environment:
       - DMN_ENV=dev
       - DMN_DATA_PATH=/home/irisowner/dev/data
